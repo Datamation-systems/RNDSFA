@@ -1,50 +1,34 @@
 {
   "project_info": {
-    "project_number": "1089398594229",
-    "firebase_url": "https://swdnew-d8d42.firebaseio.com",
-    "project_id": "swdnew-d8d42",
-    "storage_bucket": "swdnew-d8d42.appspot.com"
+    "project_number": "129105420994",
+    "firebase_url": "https://rndsfa-15387.firebaseio.com",
+    "project_id": "rndsfa-15387",
+    "storage_bucket": "rndsfa-15387.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1089398594229:android:d4d95210c04de454b1fcfc",
+        "mobilesdk_app_id": "1:129105420994:android:1ebbeaff036a42676a515b",
         "android_client_info": {
-          "package_name": "com.datamation.swdsfa"
+          "package_name": "com.datamation.rndsfa"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1089398594229-i7ukug3t39paisbe8drv21bepifq6r83.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.datamation.swdsfa",
-            "certificate_hash": "3bb3709117e5383c6691f2e6fe8846cf054613a3"
-          }
-        },
-        {
-          "client_id": "1089398594229-lrb8su3lkbhq0tcfmu67cfiuc763a9r7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.datamation.swdsfa",
-            "certificate_hash": "f8cf12564a47768cd331f67d1fddae90e02615b4"
-          }
-        },
-        {
-          "client_id": "1089398594229-b74s6vpqslq416btvqfbbl5ba8kmj259.apps.googleusercontent.com",
+          "client_id": "129105420994-2nfhga5tls0l9o2ae50ji65djg68tle9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAUsAwButJDTLIxD8jTRbAWo-u_FX7knWw"
+          "current_key": "AIzaSyDyT_3LKRmuAkmalK6ZSU2YPVcBobhkq7c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1089398594229-b74s6vpqslq416btvqfbbl5ba8kmj259.apps.googleusercontent.com",
+              "client_id": "129105420994-2nfhga5tls0l9o2ae50ji65djg68tle9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
