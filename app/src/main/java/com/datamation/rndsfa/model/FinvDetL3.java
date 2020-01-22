@@ -1,28 +1,33 @@
 package com.datamation.rndsfa.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FinvDetL3 {
-	
-	private String FINVDETL3_ID;
+
+	@SerializedName("Amt")
 	private String FINVDETL3_AMT;
+	@SerializedName("ItemCode")
 	private String FINVDETL3_ITEM_CODE;
+	@SerializedName("BrandCode")
 	private String FINVDETL3_BRAND_CODE;
+	@SerializedName("Qty")
 	private String FINVDETL3_QTY;
+	@SerializedName("RefNo")
 	private String FINVDETL3_REF_NO;
+	@SerializedName("SeqNo")
 	private String FINVDETL3_SEQ_NO;
+	@SerializedName("TaxAmt")
 	private String FINVDETL3_TAX_AMT;
+	@SerializedName("TaxComCode")
 	private String FINVDETL3_TAX_COM_CODE;
+	@SerializedName("TxnDate")
 	private String FINVDETL3_TXN_DATE;
+	@SerializedName("CostCode")
 	private String FINVDETL3_COST_CODE;
-	
-	public String getFINVDETL3_ID() {
-		return FINVDETL3_ID;
-	}
-	public void setFINVDETL3_ID(String fINVDETL3_ID) {
-		FINVDETL3_ID = fINVDETL3_ID;
-	}
+
 	public String getFINVDETL3_AMT() {
 		return FINVDETL3_AMT;
 	}

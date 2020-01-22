@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/GIT-RNDSFA.iml" filepath="$PROJECT_DIR$/GIT-RNDSFA.iml" />
       <module fileurl="file://$PROJECT_DIR$/RNDSFA.iml" filepath="$PROJECT_DIR$/RNDSFA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/RNDSFA-app.iml" filepath="$PROJECT_DIR$/app/RNDSFA-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
