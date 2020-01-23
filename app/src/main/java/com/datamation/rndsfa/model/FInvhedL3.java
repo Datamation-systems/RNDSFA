@@ -1,17 +1,27 @@
 package com.datamation.rndsfa.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FInvhedL3 {
 
+    @SerializedName("ID")
     private String FINVHEDL3_ID;
+    @SerializedName("DebCode")
     private String FINVHEDL3_DEB_CODE;
+    @SerializedName("RefNo")
     private String FINVHEDL3_REF_NO;
+    @SerializedName("RefNo1")
     private String FINVHEDL3_REF_NO1;
+    @SerializedName("TotalAmt")
     private String FINVHEDL3_TOTAL_AMT;
+    @SerializedName("TotalTax")
     private String FINVHEDL3_TOTAL_TAX;
+    @SerializedName("TxnDate")
     private String FINVHEDL3_TXN_DATE;
+
 
     public String getFINVHEDL3_ID() {
         return FINVHEDL3_ID;

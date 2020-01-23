@@ -31,6 +31,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.datamation.rndsfa.api.ApiCllient;
 import com.datamation.rndsfa.api.ApiInterface;
 import com.datamation.rndsfa.model.retrofit.LastThreeInvoiceDetails;
+import com.datamation.rndsfa.model.retrofit.LastThreeInvoiceHeader;
 import com.datamation.rndsfa.viewmodel.upload.UploadAttendance;
 import com.datamation.rndsfa.viewmodel.upload.UploadDebtorCordinates;
 import com.datamation.rndsfa.viewmodel.upload.UploadDebtorImges;
@@ -1258,17 +1259,33 @@ public class FragmentTools extends Fragment implements View.OnClickListener, Upl
 
                     // Processing lastinvoiceheds
 
-                    FInvhedL3Controller invoiceHedController = new FInvhedL3Controller(getActivity());
+                    final FInvhedL3Controller invoiceHedController = new FInvhedL3Controller(getActivity());
                     invoiceHedController.deleteAll();
                     try {
-                        JSONObject invoiceHedJSON = new JSONObject(last3InvHeds);
-                        JSONArray invoiceHedJSONJSONArray = invoiceHedJSON.getJSONArray("RepLastThreeInvHedResult");
-                        ArrayList<FInvhedL3> invoiceHedList = new ArrayList<FInvhedL3>();
-                        for (int i = 0; i < invoiceHedJSONJSONArray.length(); i++) {
-                            invoiceHedList.add(FInvhedL3.parseInvoiceHeds(invoiceHedJSONJSONArray.getJSONObject(i)));
-                        }
-                        invoiceHedController.createOrUpdateFinvHedL3(invoiceHedList);
-                    } catch (JSONException | NumberFormatException e) {
+
+                        ApiInterface apiInterface = ApiCllient.getClient().create(ApiInterface.class);
+                        //Call<LastThreeInvoiceDetails> resultCall = apiInterface.getInvoiceDetails(pref.getDistDB(),repcode);
+                        Call<LastThreeInvoiceHeader> resultCall = apiInterface.getInvoiceHedDetails(pref.getDistDB(),repcode);
+                        resultCall.enqueue(new Callback<LastThreeInvoiceHeader>() {
+                            @Override
+                            public void onResponse(Call<LastThreeInvoiceHeader> call, Response<LastThreeInvoiceHeader> response) {
+                                System.out.println("test responce 01 " + response.body().getInvHedResult().size());
+                                //  System.out.println(response.body().getInvDetResult().get(1));
+                                ArrayList<FInvhedL3> invoiceHedList = new ArrayList<FInvhedL3>();
+                                for (int i = 0; i < response.body().getInvHedResult().size(); i++) {
+                                    invoiceHedList.add(response.body().getInvHedResult().get(i));
+                                }
+                                invoiceHedController.createOrUpdateFinvHedL3(invoiceHedList);
+                                System.out.println("Item List " + invoiceHedList.toString());
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<LastThreeInvoiceHeader> call, Throwable t) {
+                                t.printStackTrace();
+                            }
+                        });
+                    } catch (Exception e) {
                         errors.add(e.toString());
 //                        ErrorUtil.logException("LoginActivity -> Authenticate -> doInBackground() # Process Routes and Outlets",
 //                                e, routes, BugReport.SEVERITY_HIGH);

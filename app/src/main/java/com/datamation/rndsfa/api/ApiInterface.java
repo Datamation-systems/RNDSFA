@@ -1,6 +1,7 @@
 package com.datamation.rndsfa.api;
 
 import com.datamation.rndsfa.model.retrofit.LastThreeInvoiceDetails;
+import com.datamation.rndsfa.model.retrofit.LastThreeInvoiceHeader;
 import com.datamation.rndsfa.viewmodel.helpers.SharedPref;
 
 import retrofit2.Call;
@@ -13,8 +14,14 @@ import retrofit2.http.Query;
  */
 
 public interface ApiInterface {
+
     @GET("RepLastThreeInvDet/mobile123/{dbname}/{repcode}")
    // Call<LastThreeInvoiceDetails> getInvoiceDetails();
     Call<LastThreeInvoiceDetails> getInvoiceDetails(@Path("dbname") String dbname, @Path("repcode") String repcode);
    // Call<LastThreeInvoiceDetails> getInvoiceDetails(@Query("dbname") String dbname,@Query("RepCode") String repcode);
+
+    @GET("RepLastThreeInvHed/mobile123/{dbname}/{repcode}")
+    Call<LastThreeInvoiceHeader> getInvoiceHedDetails(@Path("dbname") String db , @Path("repcode") String rep);
+
+
 }

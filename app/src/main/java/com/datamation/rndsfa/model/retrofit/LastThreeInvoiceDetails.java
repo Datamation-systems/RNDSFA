@@ -17,4 +17,7 @@ public class LastThreeInvoiceDetails {
     public void setInvDetResult(List<FinvDetL3> invDetResult) {
         this.invDetResult = invDetResult;
     }
+
+
+
 }
