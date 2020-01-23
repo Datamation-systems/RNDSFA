@@ -28,6 +28,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.datamation.rndsfa.api.ApiCllient;
+import com.datamation.rndsfa.api.ApiInterface;
+import com.datamation.rndsfa.model.retrofit.LastThreeInvoiceDetails;
 import com.datamation.rndsfa.viewmodel.upload.UploadAttendance;
 import com.datamation.rndsfa.viewmodel.upload.UploadDebtorCordinates;
 import com.datamation.rndsfa.viewmodel.upload.UploadDebtorImges;
@@ -132,6 +135,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /***@Auther - rashmi**/
 
 public class FragmentTools extends Fragment implements View.OnClickListener, UploadTaskListener {
@@ -1284,18 +1292,41 @@ public class FragmentTools extends Fragment implements View.OnClickListener, Upl
                         }
                     });
 
-                    FinvDetL3Controller invoiceDetController = new FinvDetL3Controller(getActivity());
+                    final FinvDetL3Controller invoiceDetController = new FinvDetL3Controller(getActivity());
                     invoiceDetController.deleteAll();
                     // Processing lastinvoiceheds
                     try {
-                        JSONObject invoiceHedJSON = new JSONObject(last3InvDets);
-                        JSONArray invoiceHedJSONJSONArray = invoiceHedJSON.getJSONArray("RepLastThreeInvDetResult");
-                        ArrayList<FinvDetL3> invoiceDetList = new ArrayList<FinvDetL3>();
-                        for (int i = 0; i < invoiceHedJSONJSONArray.length(); i++) {
-                            invoiceDetList.add(FinvDetL3.parseInvoiceDets(invoiceHedJSONJSONArray.getJSONObject(i)));
-                        }
-                        invoiceDetController.createOrUpdateFinvDetL3(invoiceDetList);
-                    } catch (JSONException | NumberFormatException e) {
+//                        JSONObject invoiceHedJSON = new JSONObject(last3InvDets);
+//                        JSONArray invoiceHedJSONJSONArray = invoiceHedJSON.getJSONArray("RepLastThreeInvDetResult");
+//                        ArrayList<FinvDetL3> invoiceDetList = new ArrayList<FinvDetL3>();
+//                        for (int i = 0; i < invoiceHedJSONJSONArray.length(); i++) {
+//                            invoiceDetList.add(FinvDetL3.parseInvoiceDets(invoiceHedJSONJSONArray.getJSONObject(i)));
+//                        }
+//                        invoiceDetController.createOrUpdateFinvDetL3(invoiceDetList);
+                        ApiInterface apiInterface = ApiCllient.getClient().create(ApiInterface.class);
+                        //Call<LastThreeInvoiceDetails> resultCall = apiInterface.getInvoiceDetails(pref.getDistDB(),repcode);
+                        Call<LastThreeInvoiceDetails> resultCall = apiInterface.getInvoiceDetails(pref.getDistDB(),repcode);
+                        resultCall.enqueue(new Callback<LastThreeInvoiceDetails>() {
+                            @Override
+                            public void onResponse(Call<LastThreeInvoiceDetails> call, Response<LastThreeInvoiceDetails> response) {
+                                System.out.println("test responce 01 " + response.body().getInvDetResult().size());
+                              //  System.out.println(response.body().getInvDetResult().get(1));
+                                ArrayList<FinvDetL3> invoiceDetList = new ArrayList<FinvDetL3>();
+                                for (int i = 0; i < response.body().getInvDetResult().size(); i++) {
+                                    invoiceDetList.add(response.body().getInvDetResult().get(i));
+                                }
+                                invoiceDetController.createOrUpdateFinvDetL3(invoiceDetList);
+                                System.out.println("Item List " + invoiceDetList.toString());
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<LastThreeInvoiceDetails> call, Throwable t) {
+                                t.printStackTrace();
+                            }
+                        });
+                    } catch (Exception e) {
+ //                   } catch (JSONException | NumberFormatException e) {
                         errors.add(e.toString());
 //                        ErrorUtil.logException("LoginActivity -> Authenticate -> doInBackground() # Process Routes and Outlets",
 //                                e, routes, BugReport.SEVERITY_HIGH);
